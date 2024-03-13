@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/chambreAdmin.css">
+    <script src="js/Universal.js" defer></script>
+    <title>Gestion des Chambres - Hôtel XYZ</title>
+</head>
+<body>
+    
+    <header>
+        <h1>Bienvenue à l'Hôtel XYZ</h1>
+ 
+
+    <!-- Barre de navigation -->
+    <nav>
+        <ul>
+            <li><a href="/user">User</a></li>
+            <!-- <li><a href="#profil">Profil</a></li> -->
+            <li><a href="/chambre">Chambres</a></li>
+            <li><a href="/chambre_admin">Chambre Admin</a></li>
+            <li><a href="//pers">Personnel Admin</a></li>
+            <li><a href="/personel">Personnel</a></li>
+
+            <li><a href="/facture">Voir Factures</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main>
+        <section id="ajouter-chambre">
+            <!-- Bouton pour ouvrir la modal -->
+            <button id="ouvrir-modal">Ajouter une chambre</button>
+
+            <!-- Formulaire modal pour ajouter/mettre à jour une chambre -->
+        <!-- ... Votre code HTML précédent ... -->
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="fermer-modal">&times;</span>
+        <h2>Ajouter/Mettre à jour une Chambre</h2>
+        <form id="chambre-form" action="/create_user" method="Post">
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="nom">Password :</label>
+                <input type="text" id="nom" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nom">Numero Cni :</label>
+                <input type="text" id="nom" name="ncni" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nom">Email :</label>
+                <input type="text" id="nom" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nom">Number :</label>
+                <input type="number" id="nom" name="number" required>
+            </div>
+
+
+            <input type="submit" value="Ajouter">
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Hôtel XYZ. Tous droits réservés.</p>
+    </footer>
+    <script>
+        // Récupérer le bouton "Modifier" par son ID
+        var boutonModifier = document.getElementById('ouvrir-modal2');
+    
+        // Ajouter un gestionnaire d'événements au clic sur le bouton "Modifier"
+        boutonModifier.addEventListener('click', function() {
+            // Récupérer l'élément <h3> qui contient l'ID de la chambre
+            var elementIdChambre = document.querySelector('.modifier');
+    
+            // Récupérer l'ID de la chambre à partir du texte de l'élément <h3>
+            var idChambre = elementIdChambre.textContent;
+    
+            // Supprimer les caractères non numériques de l'ID (par exemple, s'il y a du texte autour)
+            idChambre = idChambre.replace(/\D/g, '');
+    
+            // Récupérer l'élément <input> par son ID
+            var champInput = document.getElementById('idChambreInput');
+    
+            // Mettre la valeur de l'ID de la chambre dans l'attribut "value" de l'input
+            champInput.value = idChambre;
+        });
+
+            // Récupérer l'élément <input> par son ID
+            var champInput = document.getElementById('idChambreInput');
+
+            // Ajouter l'attribut "readonly" à l'élément <input>
+            champInput.setAttribute('readonly', 'true');
+
+
+
+
+
+        
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de Bord</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrapper {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #2f3437;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      transition: width 0.3s;
+    }
+
+    .logo {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .company-name {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .navigation {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .navigation li {
+      margin-bottom: 10px;
+    }
+
+    .navigation li a {
+      color: #ffffff;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
+
+    .navigation li a.active {
+      background-color: #4caf50;
+    }
+
+    .bottom-button {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .login-logout-button {
+      background-color: #ff9800;
+      border: none;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      min-width: 200px;
+    }
+
+    .search-button {
+      background-color: #4caf50;
+      border: none;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+
+
+    .view-details-btn {
+      margin-top: 10px;
+      background-color: #007bff;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .toggle-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 20px;
+      background-color: #2f3437;
+      color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 40px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Masquer la barre verticale */
+    .sidebar.hidden {
+      width: 0;
+      overflow: hidden;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .filter-button {
+      background-color: #4caf50;
+      border: none;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .filter-button:last-child {
+      margin-right: 0;
+    }
+
+
+    .personnel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+
+        .personnel-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .personnel-card {
+            width: calc(20.33% - 20px);
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .personnel-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 10%;
+            margin-right: 10px;
+        }
+
+        .personnel-nom {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .personnel-poste {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .personnel-annees {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .personnel-note {
+            font-size: 16px;
+            color: #FFD700;
+        }
+
+        .action-buttons {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .action-button, /* Pour les boutons */
+        .action-button a {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+            margin-right: 5px;
+            text-decoration: none; /* Enlève le soulignement du lien */
+        }
+
+        .modifier {
+            background-color: #007BFF;
+        }
+
+        .supprimer {
+            background-color: #DC3545;
+        }
+
+        .voir-plus {
+            background-color: #28A745;
+        }
+
+        /* ... Ajoutez le reste de votre CSS ... */
+
+        /* Styles for the modal container */
+        .modal-container {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        button[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+/* pour faire le preview de la photo */
+        /* .photo-preview {
+    width: 200px;
+    height: 200px;
+    border: 2px solid #ccc;
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.photo-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+} */
+
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="sidebar">
+      <!-- Logo de l'entreprise -->
+      <div class="logo">Logo de l'entreprise</div>
+      <!-- Nom de l'entreprise -->
+      <div class="company-name">Nom de l'entreprise</div>
+      <!-- Liens de navigation -->
+      <ul class="navigation">
+        <li><a href="#">Factures</a></li>
+        <li><a href="#" class="active">Personnel</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Reservation</a></li>
+        <br>
+        <li><button class="login-logout-button">Login / Logout</button></li>
+        <li>      <!-- Photo de l'utilisateur -->
+           <img class="user-photo" src="" alt="Photo de l'utilisateur"> <!-- Remplacez par le chemin de la photo de l'utilisateur -->
+            <!-- Pseudonyme de l'utilisateur -->
+            </li>
+        <li><div class="user-username">Pseudonyme de l'utilisateur</div></li>
+      </ul>
+
+    </div>
+
+    <div class="main-content">
+      <!-- Barre de recherche -->
+      <div class="search-bar">
+        <input type="text" class="search-input" placeholder="Rechercher...">
+        <button class="search-button">Rechercher</button>
+      </div>
+
+
+      <!-- Boutons de filtre -->
+      <div class="filter-buttons">
+        <button class="filter-button modifier">Ajouter</button>
+      </div>
+
+
+      <!-- Contenu principal -->
+      <div class="content-section">
+    
+
+
+
+
+
+
+
+        <div >
+        <div class="personnel-container">
+            <div  th:each="pers : ${ens}" class="personnel-card">
+                <img class="personnel-photo" th:src="*{'data:image/jpeg;base64,'+{pers.photo}}"  alt="Photo du personnel">
+                <div class="personnel-info">
+                    <div class="personnel-nom">[[*{pers.nom}]]</div>
+                    <div class="personnel-nom">[[*{pers.prenom}]]</div>
+                    <div class="personnel-nom">addresse mail: [[*{pers.email}]]</div>
+                    <div class="personnel-poste">Poste occupé: [[*{pers.poste}]]</div>
+                    <div class="personnel-annees">[[*{pers.mois}]] de service</div>
+                    <div class="personnel-annees">numero de la cni [[*{pers.ncni}]]</div>
+                    <div class="personnel-note">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                </div>
+                <div class="action-buttons">
+                    <a th:href="@{/edit/{id}(id=${pers.id})}" class="action-button modifier">Modifier</a>
+
+                    <a th:href="@{/delete_pers/{id}(id=${pers.id})}" class="action-button supprimer">Supprimer</a>
+                    
+                    <button class="action-button voir-plus">Voir plus</button>
+                </div>
+            </div>
+        </div>    
+        </div>
+
+
+        <div id="modal-container" class="modal-container">
+            <div class="modal-content">
+                <!-- <span class="close" id="modal-close">&times;</span> je retire ceci pour eviter que lorsque l'on ferme le model des pb pour des ajouts soit present -->
+                <h2> Vous modifier les donnees du professeur ayant l'Id " [[*{id}]] " </h2>
+                <form id="modifier-form"  th:action="@{/update_pers/{id}(id=${id})}" method="Post" ENCTYPE="multipart/form-data">
+
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom" name="nom" required>
+                    
+                    <label for="prenom">Prénom :</label>
+                    <input type="text" id="prenom" name="prenom" required>
+                    
+                    <label for="annee">Années ou mois d'expérience :</label>
+                    <input type="number" id="annee" name="mois" required>
+                    
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="ncni">Ncni :</label>
+                    <input type="text" id="ncni" name="ncni" required>
+
+                    <label for="poste">Poste :</label>
+                    <input type="text" id="poste" name="poste" required>
+                    
+                    <label for="photo">Photo :</label>
+                    <input type="file" id="photo" name="file" accept="image/*" required>
+
+                    <!-- <div class="photo-preview">
+                        <img class="personnel-photo" src="" alt="Photo actuelle">
+                    </div> -->
+                    <!-- ici je previsualises la photo precedente -->
+                    
+                    <button type="submit">Enregistrer</button>
+                    <div class="action-buttons">
+                      <a th:href="@{/pers}" class="action-button supprimer">Annuler</a>
+                  </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-ajouter" class="modal-container">
+            <div class="modal-content">
+                <span class="close" id="modal-close-ajouter">&times;</span>
+                <form id="ajouter-form">
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom" name="nom" required>
+        
+                    <label for="prenom">Prénom :</label>
+                    <input type="text" id="prenom" name="prenom" required>
+        
+                    <label for="annee">Années d'expérience :</label>
+                    <input type="number" id="annee" name="annee" required>
+        
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+        
+                    <label for="poste">Poste :</label>
+                    <input type="text" id="poste" name="poste" required>
+        
+                    <label for="photo">Photo :</label>
+                    <input type="file" id="photo" name="photo" accept="image/*" required>
+        
+                    <button type="submit">Ajouter</button>
+                </form>
+            </div>
+        </div>
+        
+
+
+          <!-- Ajoutez plus de divs avec class="invoice-item" pour afficher plus de factures -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bouton flottant -->
+    <div class="toggle-button" onclick="toggleSidebar()">☰</div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      var sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('hidden');
+    }
+
+            // Votre code JavaScript ici
+            const modalContainer = document.getElementById('modal-container');
+        const modifierButtons = document.querySelectorAll('.modifier');
+
+        modifierButtons.forEach(() => {
+                modalContainer.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Empêche le défilement de la page lorsque le modèle est ouvert
+            });
+
+
+        const modalClose = document.getElementById('modal-close');
+        modalClose.addEventListener('click', () => {
+            modalContainer.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Rétablit le défilement de la page lorsque le modèle est fermé
+        });
+
+        const modifierForm = document.getElementById('modifier-form');
+        modifierForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            // Ajoutez ici le code pour gérer la soumission du formulaire
+            // Vous pouvez récupérer les données des champs avec les noms (name) définis dans le formulaire.
+        });
+
+
+        const modalContainerAjouter = document.getElementById('modal-ajouter');
+    const ajouterButton = document.getElementById('ajouter-button');
+
+    ajouterButton.addEventListener('click', () => {
+        modalContainerAjouter.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+
+    const modalCloseAjouter = document.getElementById('modal-close-ajouter');
+    modalCloseAjouter.addEventListener('click', () => {
+        modalContainerAjouter.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+
+    const ajouterForm = document.getElementById('ajouter-form');
+    ajouterForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        // Ajoutez ici le code pour gérer la soumission du formulaire d'ajout
+        // Vous pouvez récupérer les données des champs avec les noms (name) définis dans le formulaire.
+    });
+
+  </script>
+</body>
+
+</html>

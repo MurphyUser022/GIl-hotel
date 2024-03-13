@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles_etudiant.css">
+  <script src="js/script.js" defer></script>
+  <title>etudiant</title>
+</head>
+<body>
+
+
+
+    <div class="content-2">
+      <div class="recent-payments">
+        <div class="title">
+          <h2>Enseignants</h2>
+          <div class="user">
+            <button href="" class="btn" id="pop">Ajouter Enseignant</button>
+
+          </div>
+        </div>
+        <table class="events-table">
+          <thead>
+          <tr>
+            <th class="event-date">Id</th>
+            <th class="event-date">Email</th>
+            <th class="event-date">Nom</th>
+            <!-- <th class="event-date">Status</th> -->
+            <th class="event-date">Mot de passe</th>
+<!--            <th class="event-date">Modifier</th>-->
+            <th class="event-date">Supprimer</th>
+          </tr>
+          </thead>
+
+          <tbody>
+
+          <tr th:each="teacher : ${ens}">
+            <td data-label="Id">[[*{teacher.id}]]</td>
+            <td data-label="Email">[[*{teacher.email}]]</td>
+            <td data-label="Nom">[[*{teacher.nom}]]</td>
+
+            <td data-label="Mot de passe">[[*{teacher.password}]]</td>
+<!--            <td data-label="Modifier"><a href=""><img src="img/icons8-crayon-50.png" alt=""></a></td>-->
+            <!--                        <td data-label="Modifier"><a href=""><img src="img/icons8-poubelle-50.png" alt=""></a></td>-->
+   
+           <td data-label="Status"><a th:href="@{/reserve/{id}(id=${teacher.id})}"><img src="img/icons8-crayon-50.png" alt=""></a></td>
+
+            <td data-label="Supprimer"><a th:href="@{/delete_enseignant/{id}(id=${teacher.id})}"><img src="img/icons8-poubelle-50.png" alt=""></a></td>
+            <!--          -->
+          </tr>   
+          </tbody>
+
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="modal">
+    <div class="cover"></div>
+    <main>
+      <form action="/create_enseignant" method="Post" ENCTYPE="multipart/form-data">
+        <div class="contactez-nous">
+          <h1>Contactez-nous</h1>
+          <p>Enregistrer un professeur dans mon application de gestion de fichi de suivie </p>
+
+          <div>
+            <label for="nomm">Votre nom</label>
+            <input type="text" id="nomm" name="nom" placeholder="Martin" required>
+          </div>
+          <div>
+            <label for="emaill">Votre e-mail</label>
+            <input type="email" id="emaill" name="mail" placeholder="monadresse@mail.com" required>
+          </div>
+          <div>
+            <label for="pwd">Votre password</label>
+            <input type="password" id="pwd" name="password"  required>
+          </div>
+          <br>
+          <div>
+            <button type="submit" class="btn">Save</button>
+          </div>
+
+        </div>
+      </form>
+    </main>
+
+  </div>
+</section>
+</body>
+</html>

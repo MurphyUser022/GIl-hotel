@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/chambreAdmin.css">
+    <script src="js/Universal.js" defer></script>
+    <title>Gestion du personel - Hôtel XYZ</title>
+</head>
+<body>
+    
+    
+    <header>
+        <h1>Bienvenue à l'Hôtel XYZ</h1>
+ 
+
+    <!-- Barre de navigation -->
+    <nav>
+        <ul>
+            <li><a href="/user">User</a></li>
+            <!-- <li><a href="#profil">Profil</a></li> -->
+            <li><a href="/chambre">Chambres</a></li>
+            <li><a href="/chambre_admin">Chambre Admin</a></li>
+            <li><a href="/pers">Personnel Admin</a></li>
+            <li><a href="/personel">Personnel</a></li>
+
+            <li><a href="/facture">Voir Factures</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+        </section>
+
+<!-- ... Votre code HTML précédent ... -->
+
+<section id="liste-chambres">
+    <!-- Barre de recherche -->
+    <div id="recherche">
+        <input type="text" id="recherche-chambre" placeholder="Rechercher une chambre...">
+        <button id="rechercher-btn">Rechercher</button>
+    </div>
+
+    <!-- Liste des Chambres sous forme de cadres -->
+    <h2>Liste des membres du personnels</h2>
+    <div class="chambre-liste" id="chambre-list">
+        <!-- Chambre 1 : Libre -->
+        <div class="chambre-cadre"  th:each="pers : ${ens}">
+              
+          <img class="personnel-photo" th:src="*{'data:image/jpeg;base64,'+{pers.photo}}" alt="Photo du personnel">
+          <div class="personnel-info">
+              <p class="modifier">ID personel :[[*{pers.id}]]</p>
+              <div class="personnel-nom">[[*{pers.nom}]]</div>
+              <div class="personnel-prenom">[[*{pers.prenom}]]</div>
+              <div class="personnel-email">Adresse email : [[*{pers.email}]]</div>
+              <div class="personnel-poste">Poste occupé : [[*{pers.poste}]]</div>
+              <div class="personnel-experience">Expérience : [[*{pers.mois}]] mois</div>
+              <div class="personnel-ncni">Numéro de la CNI : [[*{pers.ncni}]]</div>
+              <div class="personnel-note">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              
+          </div>
+
+            
+        </div>
+
+    </div>
+<br>
+
+    </div>
+    <!-- Boutons pour filtrer les chambres -->
+
+</section>
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Hôtel XYZ. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>

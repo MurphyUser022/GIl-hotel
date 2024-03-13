@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réservation Hôtel</title>
+  <style>
+    /* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Styles pour les actualités */
+#actualites {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.article {
+    background-color: #fff;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.article img {
+    max-width: 100%;
+}
+
+/* Styles pour le profil */
+#profil {
+    text-align: center;
+}
+
+#user-profile img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
+}
+
+/* Styles pour le pied de page */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+/*********************** Chambre ***************/
+
+
+
+
+.reservation-form {
+    max-width: 400px;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin: 20px auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Styles pour le formulaire de réservation */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+select {
+    appearance: none;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+} 
+  </style>
+</head>
+
+<body>
+    <header>
+        <h1>Bienvenue à l'Hôtel XYZ</h1>
+ 
+
+    <!-- Barre de navigation -->
+    <nav>
+      <ul>
+        <li><a href="/perspective">Actualités</a></li>
+        <li><a href="/perspective">Profil</a></li>
+        <li><a href="/chambre">Chambres</a></li>
+        <li><a href="reservation.html">Réservation</a></li>
+        <li><a href="/perspective">Menu</a></li>
+        <li><a href="/personel">Personnel</a></li>
+        <li><a href="/facture">Voir Factures</a></li>
+    </ul>
+    </nav>
+</header>
+
+    <div class="reservation-form">
+        <form th:action="@{/reserve/{id}(id=${chambre.idchambre})}" method="post" onsubmit="return validateForm()">
+            <!-- <div class="form-group">
+              <label for="name">Nom complet :</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Adresse e-mail :</label>
+              <input type="email" id="email" name="email" required>
+            </div> -->
+      
+      
+            <div class="form-group">
+              <label for="check-in-date">Date d'arrivée :</label>
+              <input type="date" id="check-in-date" name="check-in-date" required>
+            </div>
+            <div class="form-group">
+              <label for="check-in-time">Heure d'arrivée :</label>
+              <input type="time" id="check-in-time" name="check-in-time" required onchange="updatePrice()">
+            </div>
+            <div class="form-group">
+              <label for="check-out-date">Date de départ :</label>
+              <input type="date" id="check-out-date" name="check-out-date" required>
+            </div>
+            <div class="form-group">
+              <label for="check-out-time">Heure de départ :</label>
+              <input type="time" id="check-out-time" name="check-out-time" required onchange="updatePrice()">
+            </div>
+            <div class="form-group">
+              <label for="room-type">Type de chambre :</label>
+              <select id="room-type" name="room-type" required onchange="updatePrice()" >
+                <option th:value="${chambre.categorie}">Suite Catégorie [[*{chambre.categorie}]]</option>
+              </select>
+            </div>
+            <div class="form-group">  
+              <label for="num-people">Nombre de personnes :</label>
+              <input type="number" id="num-people" name="num-people" min="1" required onchange="updatePrice()">
+            </div>
+            <div class="form-group">
+              <label for="price">Prix total en Franc CFA:</label>
+              <input type="text" id="price" name="price" readonly>
+            </div>
+            <div class="form-footer">
+              <button type="submit">Réserver maintenant</button>
+            </div>
+          </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Hôtel XYZ. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function validateForm() {
+          // Le reste de la fonction reste inchangé
+        }
+    
+        function updatePrice() {
+          // Récupérer les valeurs saisies par l'utilisateur
+          const checkInDate = new Date(document.getElementById('check-in-date').value);
+          const checkInTime = document.getElementById('check-in-time').value;
+          const checkOutDate = new Date(document.getElementById('check-out-date').value);
+          const checkOutTime = document.getElementById('check-out-time').value;
+          const numPeople = parseInt(document.getElementById('num-people').value);
+    
+          // Formater les dates et heures d'arrivée et de départ
+          const checkInDateTime = new Date(`${checkInDate.toISOString().split('T')[0]}T${checkInTime}`);
+          const checkOutDateTime = new Date(`${checkOutDate.toISOString().split('T')[0]}T${checkOutTime}`);
+    
+          // Vérifier si la date de départ est postérieure à la date d'arrivée
+          if (checkOutDateTime <= checkInDateTime) {
+            alert("La date de départ doit être postérieure à la date d'arrivée.");
+            return; // Empêcher la mise à jour du prix si la condition n'est pas remplie
+          }
+    
+          // Calculer la différence entre la date et l'heure d'arrivée et la date et l'heure de départ en millisecondes
+          const timeDiffMillis = checkOutDateTime - checkInDateTime;
+    
+          // Convertir la différence en heures
+          const hoursDiff = timeDiffMillis / (1000 * 60 * 60);
+    
+          // Récupérer le type de chambre sélectionné
+          const roomType = document.getElementById('room-type').value;
+    
+          // Calculer le prix en fonction du type de chambre
+          let pricePerHour;
+          if (roomType === "A") {
+            pricePerHour = 800;
+          } else if (roomType === "B") {
+            pricePerHour = 400;
+          } else if (roomType === "C") {
+            pricePerHour = 200;
+          }
+    
+          // Calculer le prix total en fonction du nombre d'heures réservées
+          const totalPrice = pricePerHour * hoursDiff;
+    
+          // Afficher le prix total
+        //   document.getElementById('price').value = totalPrice + "$";
+             document.getElementById('price').value = totalPrice ;
+        }
+
+                    // Récupérer l'élément <input> par son ID
+          var champInput = document.getElementById('room-type');
+
+          // Ajouter l'attribut "readonly" à l'élément <input>
+          champInput.setAttribute('readonly', 'true');
+      </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accès Interdit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .message {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .emoji {
+            font-size: 100px;
+            margin-bottom: 20px;
+        }
+
+        .retour-btn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .retour-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="message">
+        <div class="emoji">😁️😶‍🌫️️👨‍💻️</div>
+        <h1>Sorry mais nous n'avons pas encore realiser cette fonctionnalite</h1>
+        <p>La version 02 de notre travail implementera cette fonctionnalite.</p>
+        <a th:href="@{/{id}(id=${retour})}" class="retour-btn">Retour</a>
+    </div>
+</body>
+
+</html>

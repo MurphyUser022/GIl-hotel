@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/chambreAdmin.css">
+    <script src="js/Universal.js" defer></script>
+    <title>Gestion des Chambres - Hôtel XYZ</title>
+</head>
+<body>
+    
+    <header>
+        <h1>Bienvenue à l'Hôtel XYZ</h1>
+ 
+
+    <!-- Barre de navigation -->
+    <nav>
+        <ul>
+            <li><a href="/user">User</a></li>
+            <!-- <li><a href="#profil">Profil</a></li> -->
+            <li><a href="/chambre">Chambres</a></li>
+            <li><a href="/chambre_admin">Chambre Admin</a></li>
+            <li><a href="/pers">Personnel Admin</a></li>
+            <li><a href="/personel">Personnel</a></li>
+
+            <li><a href="/facture">Voir Factures</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main>
+        <section id="ajouter-chambre">
+            <!-- Bouton pour ouvrir la modal -->
+            <button id="ouvrir-modal">Ajouter une chambre</button>
+
+            <!-- Formulaire modal pour ajouter/mettre à jour une chambre -->
+        <!-- ... Votre code HTML précédent ... -->
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="fermer-modal">&times;</span>
+        <h2>Ajouter/Mettre à jour une Chambre</h2>
+        <form id="chambre-form" action="/create_chambre" method="Post">
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categorie">Catégorie :</label>
+                <select id="categorie" name="categorie" required>
+                  <option value="" disabled selected>Choisir le type de chambre</option>
+                  <option value="A">Suite Catégorie A</option>
+                  <option value="B">Suite Catégorie B</option>
+                  <option value="C">Suite Catégorie C</option>
+                </select>
+
+            </div>
+
+
+ 
+            <!-- <div class="form-group">
+                <label for="nb-places">Nombre de Places :</label>
+                <input type="number" id="nb-places" required>
+            </div> -->
+
+            <input type="submit" value="Ajouter">
+        </form>
+    </div>
+</div>
+
+
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <span class="close" id="fermer-modal2">&times;</span>
+        <h2>Mettre à jour une Chambre</h2>
+        <form id="chambre-form" action="/update_chambre" method="Post">
+            <div class="form-group">
+                <label for="nom">ID de la chambre :</label>
+                <input type="text" id="idChambreInput" name="idChambre" value="">
+            </div>
+
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categorie">Catégorie :</label>
+                <select id="categorie" name="categorie" required>
+                  <option value="" disabled selected >Choisir le type de chambre</option>
+                  <option value="A">Suite Catégorie A</option>
+                  <option value="B">Suite Catégorie B</option>
+                  <option value="C">Suite Catégorie C</option>
+                </select>
+
+            </div>
+
+ 
+            <!-- <div class="form-group">
+                <label for="nb-places">Nombre de Places :</label>
+                <input type="number" id="nb-places" required>
+            </div> -->
+
+            <input type="submit" value="Ajouter">
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+        </section>
+
+<!-- ... Votre code HTML précédent ... -->
+
+<section id="liste-chambres">
+    <!-- Barre de recherche -->
+    <div id="recherche">
+        <input type="text" id="recherche-chambre" placeholder="Rechercher une chambre...">
+        <button id="rechercher-btn">Rechercher</button>
+    </div>
+    <div id="boutons-filtre">
+        <a href="lien_afficher_toutes_chambres.html" class="filtre-chambre">Afficher toutes les chambres</a>
+        <a href="/chambre_admin_categorie_A" class="filtre-chambre">Catégorie A</a>
+        <a href="" class="filtre-chambre">Catégorie B</a>
+        <a href="" class="filtre-chambre">Catégorie C</a>
+    </div>
+    <!-- Liste des Chambres sous forme de cadres -->
+    <h2>Liste des Chambres Occupée</h2>
+    <div class="chambre-liste" id="chambre-list">
+        <!-- Chambre 1 : Libre -->
+        <div class="chambre-cadre"  th:each="reservation : ${chambreReserver}">
+
+              
+            <h3 th:text="${reservation.voicidchambre.nom}">Nom de la chambre</h3>            
+            <p>ID chambre : <span th:text="${reservation.voicidchambre.idchambre}">ID chambre</span></p>
+            <p>Catégorie : <span th:text="${reservation.voicidchambre.categorie}">Catégorie</span></p>
+           
+
+            <p><span class="statut-reserve">❌ Réservée</span></p>
+            <p class="id-client">ID Client : [[*{reservation.id_client}]]</p>
+            <p class="date-fin-reservation">Date de fin de réservation : [[*{reservation.date_depart}]]</p>
+
+            
+        </div>
+
+    </div>
+<br>
+    <!-- Liste des Chambres sous forme de cadres -->
+    <h2>Liste des Chambres Libres</h2>
+    <div class="chambre-liste" id="chambre-list">
+        <div class="chambre-cadre " th:each=" chlibre : ${chambreLibre}">
+            <h3 >Nom : [[*{chlibre.nom}]]</h3>
+            <p class="modifier">ID chambre :[[*{chlibre.idchambre}]]</p>
+            <p>Catégorie : [[*{chlibre.categorie}]]</p>
+            <p><span class="statut-libre">✅ Libre</span></p>
+            <a  id="ouvrir-modal2" class="modifier-chambre">Modifier</a>
+            <a  th:href="@{/delete_chambre/{id}(id=${chlibre.idchambre})}" class="supprimer-chambre">Supprimer</a>
+        </div>
+    </div>
+    <!-- Boutons pour filtrer les chambres -->
+
+</section>
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Hôtel XYZ. Tous droits réservés.</p>
+    </footer>
+    <script>
+        // Récupérer le bouton "Modifier" par son ID
+        var boutonModifier = document.getElementById('ouvrir-modal2');
+    
+        // Ajouter un gestionnaire d'événements au clic sur le bouton "Modifier"
+        boutonModifier.addEventListener('click', function() {
+            // Récupérer l'élément <h3> qui contient l'ID de la chambre
+            var elementIdChambre = document.querySelector('.modifier');
+    
+            // Récupérer l'ID de la chambre à partir du texte de l'élément <h3>
+            var idChambre = elementIdChambre.textContent;
+    
+            // Supprimer les caractères non numériques de l'ID (par exemple, s'il y a du texte autour)
+            idChambre = idChambre.replace(/\D/g, '');
+    
+            // Récupérer l'élément <input> par son ID
+            var champInput = document.getElementById('idChambreInput');
+    
+            // Mettre la valeur de l'ID de la chambre dans l'attribut "value" de l'input
+            champInput.value = idChambre;
+        });
+
+            // Récupérer l'élément <input> par son ID
+            var champInput = document.getElementById('idChambreInput');
+
+            // Ajouter l'attribut "readonly" à l'élément <input>
+            champInput.setAttribute('readonly', 'true');
+
+
+
+
+
+        
+    </script>
+    
+</body>
+</html>

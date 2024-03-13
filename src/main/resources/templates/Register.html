@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enregistrement sur la plateforme de l'hotel</title>
+  <style>
+    /* Le CSS pour styliser le formulaire */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .register-form {
+      width: 600px; /* Largeur du formulaire */
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .register-form h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #007bff;
+    }
+
+    .register-form div {
+      margin-bottom: 15px;
+    }
+
+    .register-form label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .register-form input[type="text"],
+    .register-form input[type="date"],
+    .register-form input[type="email"],
+    .register-form input[type="password"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .register-form input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    .register-form button {
+      background-color: #007bff;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    .register-form button:hover {
+      background-color: #0056b3;
+    }
+
+    .register-form .radio-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .register-form .radio-container label {
+      margin-right: 20px;
+    }
+
+    .password-toggle {
+      position: relative;
+    }
+
+    .password-toggle input[type="password"] {
+      padding-right: 40px;
+    }
+
+    .password-toggle .toggle-btn {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="register-form">
+    <h2>Enregistrement</h2>
+    <form onsubmit="return register()">
+      <div>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required>
+      </div>
+      <div>
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" required>
+      </div>
+      <!-- <div>
+        <label for="date_naissance">Date de naissance :</label>
+        <input type="date" id="date_naissance" name="date_naissance" required>
+      </div>
+      <div class="radio-container">
+        <label>Sexe :</label>
+        <input type="radio" id="sexe_homme" name="sexe" value="Homme" required>
+        <label for="sexe_homme">Homme</label>
+        <input type="radio" id="sexe_femme" name="sexe" value="Femme">
+        <label for="sexe_femme">Femme</label>
+      </div> -->
+      <div>
+        <label for="ncni">Numéro CNI :</label>
+        <input type="text" id="ncni" name="ncni" required>
+      </div>
+      <div>
+        <label for="speudo">Pseudonyme :</label>
+        <input type="text" id="speudo" name="speudo" required>
+      </div>
+      <div>
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="password-toggle">
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required>
+        <span class="toggle-btn" onclick="togglePassword()">👁️</span>
+      </div>
+      <div class="password-toggle">
+        <label for="confirm_password">Confirmer le mot de passe :</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        <span class="toggle-btn" onclick="toggleConfirmPassword()">👁️</span>
+      </div>
+      <button type="submit">S'inscrire</button>
+    </form>
+  </div>
+
+  <script>
+    function register() {
+      var nom = document.getElementById('nom').value;
+      var prenom = document.getElementById('prenom').value;
+      var dateNaissance = document.getElementById('date_naissance').value;
+      var sexe = document.querySelector('input[name="sexe"]:checked').value;
+      var ncni = document.getElementById('ncni').value;
+      var speudo = document.getElementById('speudo').value;
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      var confirm_password = document.getElementById('confirm_password').value;
+
+      if (password !== confirm_password) {
+        alert("Les mots de passe ne correspondent pas. Veuillez réessayer.");
+        return false;
+      }
+
+      // Ajoutez ici votre logique d'enregistrement (création d'un nouveau compte, stockage dans une base de données, etc.)
+
+      // Exemple de traitement simplifié pour l'enregistrement
+      alert('Compte créé avec succès pour l\'utilisateur : ' + speudo);
+      return false; // Empêcher la soumission du formulaire (afin de pouvoir personnaliser le comportement d'enregistrement dans votre logique)
+    }
+
+    function togglePassword() {
+      var passwordInput = document.getElementById('password');
+      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+
+    function toggleConfirmPassword() {
+      var confirmPasswordInput = document.getElementById('confirm_password');
+      confirmPasswordInput.type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>"
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de Bord</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrapper {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #2f3437;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      transition: width 0.3s;
+    }
+
+    .logo {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .company-name {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .navigation {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .navigation li {
+      margin-bottom: 10px;
+    }
+
+    .navigation li a {
+      color: #ffffff;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
+
+    .navigation li a.active {
+      background-color: #4caf50;
+    }
+
+    .bottom-button {
+      margin-top: auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .login-logout-button {
+      background-color: #ff9800;
+      border: none;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      min-width: 200px;
+    }
+
+    .search-button {
+      background-color: #4caf50;
+      border: none;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .invoice-list-container {
+      max-width: 800px;
+      margin: 20px auto;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .invoice-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 5px;
+      background-color: #f9f9f9;
+      flex-basis: calc(25% - 10px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .invoice-details {
+      flex: 1;
+      padding-right: 20px;
+    }
+
+    .invoice-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .invoice-date {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .invoice-total {
+      font-weight: bold;
+      font-size: 16px;
+      color: #007bff;
+    }
+
+    .invoice-status {
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .view-details-btn {
+      margin-top: 10px;
+      background-color: #007bff;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .toggle-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 20px;
+      background-color: #2f3437;
+      color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 40px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Masquer la barre verticale */
+    .sidebar.hidden {
+      width: 0;
+      overflow: hidden;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .filter-button {
+      background-color: #4caf50;
+      border: none;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .filter-button:last-child {
+      margin-right: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="sidebar">
+      <!-- Logo de l'entreprise -->
+      <div class="logo">Logo de l'entreprise</div>
+      <!-- Nom de l'entreprise -->
+      <div class="company-name">Nom de l'entreprise</div>
+      <!-- Liens de navigation -->
+      <ul class="navigation">
+        <li><a href="#" class="active">Factures</a></li>
+        <li><a href="#">Personnel</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Reservation</a></li>
+        <br>
+        <li><button class="login-logout-button">Login / Logout</button></li>
+        <li>      <!-- Photo de l'utilisateur -->
+           <img class="user-photo" src="chemin_vers_la_photo_de_profil.jpg" alt="Photo de l'utilisateur"> <!-- Remplacez par le chemin de la photo de l'utilisateur -->
+            <!-- Pseudonyme de l'utilisateur -->
+            </li>
+        <li><div class="user-username">[[${client.pseudo}]]</div></li>
+      </ul>
+
+    </div>
+
+    <div class="main-content">
+      <!-- Barre de recherche -->
+      <div class="search-bar">
+        <input type="text" class="search-input" placeholder="Rechercher...">
+        <button class="search-button">Rechercher</button>
+      </div>
+
+
+      <!-- Boutons de filtre -->
+      <div class="filter-buttons">
+        <button class="filter-button">Tout Afficher</button>
+        <button class="filter-button">Réservé</button>
+        <button class="filter-button">Non Réservé</button>
+      </div>
+
+
+      <!-- Contenu principal -->
+      <div class="content-section">
+        <!-- Modèle de liste de factures -->
+        <div class="invoice-list-container">
+          <div class="invoice-item">
+            <div class="invoice-details">
+              <div class="invoice-title">Facture 12345</div>
+              <div class="invoice-date">Date: 15 juillet 2023</div>
+            </div>
+            <div class="invoice-total">Total: 250$</div>
+            <div class="invoice-status">Statut: Payée</div>
+            <button class="view-details-btn">Voir plus de détails</button>
+          </div>
+
+          <div class="invoice-item">
+            <div class="invoice-details">
+              <div class="invoice-title">Facture 67890</div>
+              <div class="invoice-date">Date: 20 juillet 2023</div>
+            </div>
+            <div class="invoice-total">Total: 180$</div>
+            <div class="invoice-status">Statut: En attente de paiement</div>
+            <button class="view-details-btn">Voir plus de détails</button>
+          </div>
+
+          <!-- Ajoutez plus de divs avec class="invoice-item" pour afficher plus de factures -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bouton flottant -->
+    <div class="toggle-button" onclick="toggleSidebar()">☰</div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      var sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('hidden');
+    }
+  </script>
+</body>
+
+</html>

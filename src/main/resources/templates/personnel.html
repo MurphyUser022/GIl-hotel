@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/chambreAdmin.css">
+    <script src="js/Universal.js" defer></script>
+    <title>Gestion des Chambres - Hôtel XYZ</title>
+</head>
+<body>
+    
+    
+    <header>
+        <h1>Bienvenue à l'Hôtel XYZ</h1>
+ 
+
+    <!-- Barre de navigation -->
+    <nav>
+        <ul>
+            <li><a href="/user">User</a></li>
+            <!-- <li><a href="#profil">Profil</a></li> -->
+            <li><a href="/chambre">Chambres</a></li>
+            <li><a href="/chambre_admin">Chambre Admin</a></li>
+            <li><a href="/pers">Personnel Admin</a></li>
+            <li><a href="/personel">Personnel</a></li>
+
+            <li><a href="/facture">Voir Factures</a></li>
+        </ul>
+    </nav>
+</header>
+    <main>
+        <section id="ajouter-chambre">
+            <!-- Bouton pour ouvrir la modal -->
+            <button id="ouvrir-modal">Ajouter un personnel</button>
+
+            <!-- Formulaire modal pour ajouter/mettre à jour une chambre -->
+        <!-- ... Votre code HTML précédent ... -->
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="fermer-modal">&times;</span>
+        <h2>Ajouter/Mettre à jour une Chambre</h2>
+          <h2>Ajouter un nouveau membre du personnel</h2>
+          <form id="chambre-form" action="/create_pers" method="post" enctype="multipart/form-data">
+              <label for="nom">Nom :</label>
+              <input type="text" id="nom" name="nom" required>
+              <label for="prenom">Prénom :</label>
+              <input type="text" id="prenom" name="prenom" required>
+              <label for="mois">Mois d'expérience :</label>
+              <input type="number" id="mois" name="mois" required>
+              <label for="email">Email :</label>
+              <input type="email" id="email" name="email" required>
+              <label for="ncni">Numéro de la CNI :</label>
+              <input type="text" id="ncni" name="ncni" required>
+              <label for="poste">Poste :</label>
+              <input type="text" id="poste" name="poste" required>
+              <label for="photo">Photo :</label>
+              <input type="file" id="photo" name="file" accept="image/*" required>
+              <button type="submit">Ajouter</button>
+          </form>
+   
+    </div>
+</div>
+
+
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <span class="close" id="fermer-modal2">&times;</span>
+        <h2>Mettre à jour une personel</h2>
+          <form id="chambre-form" action="/update_pers" method="Post" enctype="multipart/form-data">
+         
+            <div class="form-group">
+              <label for="nom">ID de la chambre :</label>
+              <input type="text" id="idChambreInput" name="idChambre" value="">
+          </div>
+          
+          <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required>
+            <label for="mois">Mois d'expérience :</label>
+            <input type="number" id="mois" name="mois" required>
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+            <label for="ncni">Numéro de la CNI :</label>
+            <input type="text" id="ncni" name="ncni" required>
+            <label for="poste">Poste :</label>
+            <input type="text" id="poste" name="poste" required>
+            <label for="photo">Photo :</label>
+            <input type="file" id="photo" name="file" accept="image/*" required>
+            <button type="submit">Enregistrer</button>
+   
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+        </section>
+
+<!-- ... Votre code HTML précédent ... -->
+
+<section id="liste-chambres">
+    <!-- Barre de recherche -->
+    <div id="recherche">
+        <input type="text" id="recherche-chambre" placeholder="Rechercher une chambre...">
+        <button id="rechercher-btn">Rechercher</button>
+    </div>
+
+    <!-- Liste des Chambres sous forme de cadres -->
+    <h2>Liste des membres du personnels</h2>
+    <div class="chambre-liste" id="chambre-list">
+        <!-- Chambre 1 : Libre -->
+        <div class="chambre-cadre"  th:each="pers : ${ens}">
+              
+          <img class="personnel-photo" th:src="*{'data:image/jpeg;base64,'+{pers.photo}}" alt="Photo du personnel">
+          <div class="personnel-info">
+              <p class="modifier">ID personel :[[*{pers.id}]]</p>
+              <div class="personnel-nom">[[*{pers.nom}]]</div>
+              <div class="personnel-prenom">[[*{pers.prenom}]]</div>
+              <div class="personnel-email">Adresse email : [[*{pers.email}]]</div>
+              <div class="personnel-poste">Poste occupé : [[*{pers.poste}]]</div>
+              <div class="personnel-experience">Expérience : [[*{pers.mois}]] mois</div>
+              <div class="personnel-ncni">Numéro de la CNI : [[*{pers.ncni}]]</div>
+              <div class="personnel-note">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <a id="ouvrir-modal2" class="modifier-chambre">Modifier</a>      
+              <a  th:href="@{/delete_pers/{id}(id=${pers.id})}" class="supprimer-chambre">Supprimer</a>
+              
+          </div>
+
+            
+        </div>
+
+    </div>
+<br>
+
+    </div>
+    <!-- Boutons pour filtrer les chambres -->
+
+</section>
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Hôtel XYZ. Tous droits réservés.</p>
+    </footer>
+    <script>
+        // Récupérer le bouton "Modifier" par son ID
+        var boutonModifier = document.getElementById('ouvrir-modal2');
+    
+        // Ajouter un gestionnaire d'événements au clic sur le bouton "Modifier"
+        boutonModifier.addEventListener('click', function() {
+            // Récupérer l'élément <h3> qui contient l'ID de la chambre
+            var elementIdChambre = document.querySelector('.modifier');
+    
+            // Récupérer l'ID de la chambre à partir du texte de l'élément <h3>
+            var idChambre = elementIdChambre.textContent;
+    
+            // Supprimer les caractères non numériques de l'ID (par exemple, s'il y a du texte autour)
+            idChambre = idChambre.replace(/\D/g, '');
+    
+            // Récupérer l'élément <input> par son ID
+            var champInput = document.getElementById('idChambreInput');
+    
+            // Mettre la valeur de l'ID de la chambre dans l'attribut "value" de l'input
+            champInput.value = idChambre;
+        });
+
+            // Récupérer l'élément <input> par son ID
+            var champInput = document.getElementById('idChambreInput');
+
+            // Ajouter l'attribut "readonly" à l'élément <input>
+            champInput.setAttribute('readonly', 'true');
+
+
+
+
+
+        
+    </script>
+    
+</body>
+</html>

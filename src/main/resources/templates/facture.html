@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facture de Réservation</title>
+  <style>
+    /* Le CSS mis à jour pour améliorer la disposition */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .invoice-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 2px solid #333;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .invoice-header {
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
+    }
+
+    .invoice-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .invoice-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Disposition flexible en grille */
+      grid-gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .invoice-items {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .invoice-items th,
+    .invoice-items td {
+      border: 1px solid #333;
+      padding: 10px;
+    }
+
+    .invoice-total {
+      text-align: right;
+    }
+
+    .invoice-qr-code {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .invoice-footer {
+      text-align: center;
+      margin-top: 20px;
+      border-top: 1px solid #333;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="invoice-container">
+    <div class="invoice-header">
+      <div class="invoice-title">Facture de la réservation</div>
+      <div class="invoice-details">
+        <div>
+          <strong>Nom du client :</strong><br>
+          [[*{currentUser.userName}]]<br>
+          <strong>Email :</strong><br>
+          [[*{currentUser.email}]]<br>
+          <strong>Téléphone :</strong><br>
+          [[*{currentUser.number}]]
+        </div>
+        <div>
+          <strong>Date de réservation :</strong><br>
+          [[*{facture.date_arrivee}]]<br>
+          <strong>Heure de début :</strong><br>
+          [[*{facture.Heure_reservation}]]<br>
+          <strong>Heure de fin :</strong><br>
+          [[*{facture.Heure_fin_reservation}]]<br>
+          <strong>Nombre de personnes :</strong><br>
+          [[*{facture.nb_pers}]]
+        </div>
+      </div>
+    </div>
+    <table class="invoice-items">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Quantité</th>
+          <th>Prix unitaire</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        </tr>
+        <tr>
+          <td>Repas</td>
+          <td>2</td>
+          <td>50$</td>
+          <td>100$</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="invoice-total">Total</td>
+          <td>[[*{facture.prix+100}]]</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="invoice-qr-code">
+      <!-- Code QR de réservation -->
+     <!-- // <img src="example-qrcode.png" alt="Code QR de réservation"> -->
+      <div style="width:40%;display: inline-block">
+        <h3>Qr Code using Byte Array</h3>
+        <p>Scanner le code Qr Bar pour avoir plus d'info :
+        <img th:src="${'data:image/png;base64,' + qrcode}" alt="" height="250" width="250">
+    </div>
+    </div>
+    <div class="invoice-footer">
+      Merci de votre réservation !<br>
+      Pour toute question, veuillez nous contacter à l'adresse email@example.com ou au numéro +1 123-456-7890.
+    </div>
+  </div>
+</body>
+
+</html>

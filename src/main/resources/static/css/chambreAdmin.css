@@ -1,0 +1,483 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Styles pour les actualités */
+#actualites {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.article {
+    background-color: #fff;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.article img {
+    max-width: 100%;
+}
+
+/* Styles pour le profil */
+#profil {
+    text-align: center;
+}
+
+#user-profile img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
+}
+
+/* Styles pour le pied de page */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;  
+    position:absolute;
+}
+
+/*********************** Chambre ***************/
+
+
+
+
+
+
+/* Styles pour la gestion des chambres */
+#ajouter-chambre, #liste-chambres {
+    margin-bottom: 40px;
+}
+
+#chambre-form label, #chambre-form input, #chambre-form select {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#chambre-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#chambre-list li {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f5f5f5;
+}
+
+#chambre-list li button {
+    margin-left: 10px;
+}
+
+/* Styles pour la gestion des chambres */
+/* Styles pour la gestion des chambres *//* Styles pour la gestion des chambres */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border: 1px solid #888;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: red;
+}
+
+/* Autres styles (conserver ceux du fichier précédent) */
+
+/* Styles pour le pied de page (footer) */
+footer {
+    background-color: #333; /* Couleur de fond du pied de page */
+    color: #fff; /* Couleur du texte du pied de page */
+    padding: 10px 0; /* Espace intérieur du pied de page */
+    position: absolute;
+ /*   bottom: 0; Position en bas de la page*/
+    width: 100%;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Styles pour les cadres des chambres */
+.chambre-liste {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.chambre-cadre {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 250px; /* Ajustez la largeur selon vos besoins */
+}
+
+.chambre-cadre img {
+    max-width: 50%;
+    height: auto;
+}
+
+/* Styles pour les boutons "Modifier" et "Supprimer" */
+.modifier-chambre,
+.supprimer-chambre {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color:  #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none; /* Supprime le soulignement par défaut */
+
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+}
+
+.supprimer-chambre {
+    background-color:  #ef531a;
+}
+
+
+
+.modifier-chambre {
+    background-color:  #007bff;
+}
+
+
+
+.modifier-chambre:hover {
+    background-color: #0056b3;
+}
+
+
+.supprimer-chambre:hover {
+    background-color: #fd0c03;
+}
+/* Styles pour les boutons de filtre */
+#boutons-filtre {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#boutons-filtre button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+#boutons-filtre button:hover {
+    background-color: #0056b3;
+}
+
+/* Styles pour la barre de recherche */
+#recherche {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#recherche-chambre {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#rechercher-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#rechercher-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Styles pour les boutons-liens */
+.filtre-chambre {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none; /* Supprime le soulignement par défaut */
+}
+
+.filtre-chambre:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+/* Styles pour le bouton "Ajouter une chambre" */
+#ouvrir-modal {
+    padding: 10px 20px;
+    background-color: #007bff; /* Couleur bleue, à personnaliser */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#ouvrir-modal:hover {
+    background-color: #0056b3; /* Couleur bleue légèrement plus foncée au survol */
+}
+
+
+
+
+
+/* Styles pour les chambres libres */
+.chambre-cadre .statut-libre {
+    color: #4CAF50; /* Couleur verte pour les chambres libres */
+}
+
+/* Styles pour les chambres réservées */
+.chambre-cadre .statut-reserve {
+    color: #FF5733; /* Couleur rouge pour les chambres réservées */
+    background-color: #FFD2D2; /* Fond rouge pour les chambres réservées */
+}
+
+/* Styles pour la liste de chambres */
+
+
+
+.chambre-cadre img {
+    max-width: 100%;
+    height: auto;
+}
+
+.chambre-cadre h3 {
+    margin-top: 10px;
+    letter-spacing: 1px; /* Ajustez la valeur selon vos préférences */
+}
+
+.chambre-cadre p {
+    margin: 5px 0;
+    letter-spacing: 1px; /* Ajustez la valeur selon vos préférences */
+}
+
+
+/* Styles pour les champs d'ID client et de date de fin de réservation */
+.id-client {
+    font-weight: bold;
+    letter-spacing: 1px; /* Ajustez la valeur selon vos préférences */
+}
+
+
+
+
+
+
+
+
+/* Styles pour les cartes du personnel */
+.personnel-liste {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.personnel-card {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 300px; /* Ajustez la largeur selon vos besoins */
+}
+
+.personnel-photo {
+    width: 100px; /* Ajustez la taille de l'image selon vos besoins */
+    height: 100px; /* Ajustez la taille de l'image selon vos besoins */
+    border-radius: 2%;
+    margin: 0 auto 5px; /* Centrer l'image verticalement */
+    display: block;
+}
+
+.personnel-info {
+    text-align: center;
+}
+
+.personnel-nom,
+.personnel-prenom {
+    font-weight: bold;
+}
+
+.personnel-email,
+.personnel-poste,
+.personnel-experience,
+.personnel-ncni {
+    margin: 5px 0;
+}
+
+.action-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none; /* Supprime le soulignement par défaut */
+    margin-right: 10px;
+}
+
+.action-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Styles pour les modals */
+.modal-container {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border: 1px solid #888;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.close:hover {
+    color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

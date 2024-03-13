@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/chambre.css">
+    <title>Gestion des Chambres - Hôtel XYZ</title>
+</head>
+<body>
+    
+    <header>
+        <h1>Bienvenue à l'Hôtel XYZ</h1>
+ 
+
+    <!-- Barre de navigation -->
+    <nav>
+        <ul>
+            <li><a href="/user">User</a></li>
+            <!-- <li><a href="#profil">Profil</a></li> -->
+            <li><a href="/chambre">Chambres</a></li>
+            <li><a href="/chambre_admin">Chambre Admin</a></li>
+            <li><a href="/pers">Personnel Admin</a></li>
+            <li><a href="/personel">Personnel</a></li>
+
+            <li><a href="/facture">Voir Factures</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+    <main>
+
+<!-- ... Votre code HTML précédent ... -->
+
+<section id="liste-chambres">
+    <!-- Barre de recherche -->
+    <div id="recherche">
+        <input type="text" id="recherche-chambre" placeholder="Rechercher une chambre...">
+        <button id="rechercher-btn">Rechercher</button>
+    </div>
+    <div id="boutons-filtre">
+        <a href="/chambre" class="filtre-chambre">Afficher toutes les chambres</a>
+        <a href="/chambre_categorie_A" class="filtre-chambre">Catégorie A</a>
+        <a href="/chambre_categorie_B" class="filtre-chambre">Catégorie B</a>
+        <a href="/chambre_categorie_C" class="filtre-chambre">Catégorie C</a>
+    </div>
+    <!-- Liste des Chambres sous forme de cadres -->
+    <h2>Liste des Chambres</h2>
+    <div class="chambre-liste" id="chambre-list">
+        <!-- Chambre 1 : Libre -->
+        <div class="chambre-cadre"  th:each="ch : ${chambre}">
+            <h3>Nom : [[*{ch.nom}]]</h3>
+            <!-- <p>ID client: [[*{ch.idchambre}]]</p> -->
+            <p>Catégorie : [[*{ch.categorie}]]</p>
+            <a th:href="@{/reservation/{id}(id=${ch.idchambre})}" class="reserver-chambre">Reserver</a>
+        </div>
+
+    </div>
+
+    <!-- Boutons pour filtrer les chambres -->
+
+</section>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Hôtel XYZ. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

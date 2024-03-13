@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/chambreAdmin.css">
+    <script src="js/Universal.js" defer></script>
+    <title>Gestion des Chambres - Hôtel XYZ</title>
+</head>
+<body>
+    
+    <header>
+        <h1>Bienvenue à l'Hôtel XYZ</h1>
+ 
+
+    <!-- Barre de navigation -->
+    <nav>
+        <ul>
+            <li><a href="/user">User</a></li>
+            <!-- <li><a href="#profil">Profil</a></li> -->
+            <li><a href="/chambre">Chambres</a></li>
+            <li><a href="/chambre_admin">Chambre Admin</a></li>
+            <li><a href="/pers">Personnel Admin</a></li>
+            <li><a href="/personel">Personnel</a></li>
+
+            <li><a href="/facture">Voir Factures</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+    <main>
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+        </section>
+
+<!-- ... Votre code HTML précédent ... -->
+
+<section id="liste-chambres">
+
+<br>
+    <!-- Liste des Chambres sous forme de cadres -->
+    <h2>Liste des reservation faite</h2>
+    <div class="chambre-liste" id="chambre-list">
+        <div class="chambre-cadre " th:each=" reservation : ${reservations}">
+     
+            <p>Id reservation : [[*{reservation.idReservation}]]</p>
+            <p>Date arrivée : [[*{reservation.date_arrivee}]]</p>
+            <p>Montant : [[*{reservation.prix}]] Xfa</p>
+        
+            <a  th:href="@{/facture/{id}(id=${reservation.idReservation})}" class="modifier-chambre">detail</a>
+        </div>
+    </div>
+    <!-- Boutons pour filtrer les chambres -->
+
+</section>
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+
+<!-- ... Votre code HTML suivant ... -->
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Hôtel XYZ. Tous droits réservés.</p>
+    </footer>
+
+    
+</body>
+</html>
